@@ -32,7 +32,7 @@ var game;
             _super.apply(this, arguments);
         }
         Main.prototype.create = function () {
-            var thing = 'v2 !';
+            var thing = 'v3 !';
             this.text = this.add.text(10, 10, "Let's " + thing, { font: '65px Arial' });
         };
         Main.prototype.update = function () {
@@ -75,9 +75,9 @@ var game;
             _super.call(this, {
                 width: 768,
                 height: 432,
-                enableDebug: false
+                enableDebug: false,
+                state: new game.Boot()
             });
-            this.state.add('boot', game.Boot);
             this.state.add('preload', game.Preload);
             this.state.add('main', game.Main);
         }
@@ -85,11 +85,10 @@ var game;
             _super.prototype.boot.call(this);
             if (this.device.desktop === false) {
                 this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-                this.scale.pageAlignHorizontally = true;
-                this.scale.pageAlignVertically = true;
                 this.scale.forceOrientation(true, false);
             }
-            this.state.start('boot');
+            this.scale.pageAlignHorizontally = true;
+            this.scale.pageAlignVertically = true;
         };
         return Game;
     })(Phaser.Game);
