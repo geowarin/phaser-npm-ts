@@ -32,7 +32,7 @@ var game;
             _super.apply(this, arguments);
         }
         Main.prototype.create = function () {
-            var thing = 'celebrate !';
+            var thing = 'v2 !';
             this.text = this.add.text(10, 10, "Let's " + thing, { font: '65px Arial' });
         };
         Main.prototype.update = function () {
@@ -73,16 +73,24 @@ var game;
         __extends(Game, _super);
         function Game() {
             _super.call(this, {
-                width: 800,
-                height: 600,
-                transparent: false,
-                enableDebug: true
+                width: 768,
+                height: 432,
+                enableDebug: false
             });
             this.state.add('boot', game.Boot);
             this.state.add('preload', game.Preload);
             this.state.add('main', game.Main);
-            this.state.start('boot');
         }
+        Game.prototype.boot = function () {
+            _super.prototype.boot.call(this);
+            if (this.device.desktop === false) {
+                this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+                this.scale.pageAlignHorizontally = true;
+                this.scale.pageAlignVertically = true;
+                this.scale.forceOrientation(true, false);
+            }
+            this.state.start('boot');
+        };
         return Game;
     })(Phaser.Game);
     game.Game = Game;
