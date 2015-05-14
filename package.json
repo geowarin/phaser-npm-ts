@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf dist",
 
-    "precopy": "mkdirp dist ",
+    "precopy": "mkdirp dist",
     "copy:assets": "ncp assets dist/assets",
     "copy:html": "ncp app/html dist",
     "copy:style": "ncp app/styles dist/styles",
@@ -24,8 +24,9 @@
 
     "predeploy": "npm run build",
     "deploy": "node deploy.js",
+
     "prepackage": "npm run build",
-    "package": "nodezip -c dist/dist.zip dist",
+    "package": "cd dist && nodezip -c dist.zip .",
     "predist-deploy": "npm run package",
     "dist-deploy": "node deploy.js"
   },
