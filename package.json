@@ -25,9 +25,7 @@
     "deploy": "node deploy.js",
 
     "prepackage": "npm run build",
-    "package": "cd dist && nodezip -c dist.zip .",
-    "predist-deploy": "npm run package",
-    "dist-deploy": "node deploy.js"
+    "package": "cd dist && nodezip -c dist.zip ."
   },
   "author": "Geoffroy Warin",
   "license": "MIT",
