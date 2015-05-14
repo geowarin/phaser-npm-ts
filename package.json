@@ -7,7 +7,7 @@
     "clean": "rimraf dist",
 
     "precopy": "mkdirp dist",
-    "copy:assets": "ncp assets dist/assets",
+    "copy:assets": "ncp app/assets dist/assets",
     "copy:html": "ncp app/html dist",
     "copy:phaser": "ncp node_modules/phaser/dist/phaser.js dist/phaser.js",
     "copy": "parallelshell 'npm run copy:assets' 'npm run copy:html' 'npm run copy:phaser'",
