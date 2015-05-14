@@ -8,17 +8,24 @@ module game {
   export class Game extends Phaser.Game {
     constructor() {
       super({
-        width: 800,
-        height: 600,
-        transparent: false,
-        enableDebug: true
+        width: 768,
+        height: 432,
+        enableDebug: false,
+        state: new Boot()
       });
 
-      this.state.add('boot', Boot);
       this.state.add('preload', Preload);
       this.state.add('main', Main);
+    }
 
-      this.state.start('boot');
+    boot() {
+      super.boot();
+      if (this.device.desktop === false) {
+        this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.scale.forceOrientation(true, false);
+      }
+      this.scale.pageAlignHorizontally = true;
+      this.scale.pageAlignVertically = true;
     }
   }
 }

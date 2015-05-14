@@ -9,9 +9,8 @@
     "precopy": "mkdirp dist",
     "copy:assets": "ncp assets dist/assets",
     "copy:html": "ncp app/html dist",
-    "copy:style": "ncp app/styles dist/styles",
     "copy:phaser": "ncp node_modules/phaser/dist/phaser.js dist/phaser.js",
-    "copy": "parallelshell 'npm run copy:assets' 'npm run copy:html' 'npm run copy:style' 'npm run copy:phaser'",
+    "copy": "parallelshell 'npm run copy:assets' 'npm run copy:html' 'npm run copy:phaser'",
 
     "prebuild": "npm run copy",
     "build": "tsc -p .",

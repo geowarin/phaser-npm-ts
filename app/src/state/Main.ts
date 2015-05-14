@@ -4,7 +4,7 @@ module game {
     text:Phaser.Text;
 
     create() {
-      var thing:String = 'celebrate !';
+      var thing:String = 'v3 !';
       this.text = this.add.text(10, 10, `Let's ${thing}`, {font: '65px Arial'});
     }
 
