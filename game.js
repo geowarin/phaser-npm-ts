@@ -50,7 +50,7 @@ var game;
         Main.prototype.render = function () {
             console.log('lol');
             _super.prototype.render.call(this);
-            this.game.debug.pointer(this.input.activePointer);
+            this.game.debug.pointer(this.input.mousePointer);
         };
         return Main;
     })(Phaser.State);
