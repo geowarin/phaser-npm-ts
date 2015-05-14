@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>My game</title>
+  <meta charset="utf-8">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="Space tour">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, width=device-width, height=device-height" />
+
+  <link rel="stylesheet" href="styles/main.css" type="text/css" charset="utf-8" />
+
+  <script src="phaser.js"></script>
+  <script src="game.js"></script>
+
+</head>
+
+<body>
+<script type="text/javascript">
+
+  function init() {
+    new game.Game();
+  }
+
+  navigator.isCocoonJS ? init() : window.onload = init
+</script>
+</body>
+
+</html>
