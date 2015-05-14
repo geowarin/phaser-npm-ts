@@ -87,4 +87,3 @@ var game;
     })(Phaser.Game);
     game.Game = Game;
 })(game || (game = {}));
-//# sourceMappingURL=game.js.map
