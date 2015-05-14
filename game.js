@@ -30,10 +30,16 @@ var game;
         __extends(Main, _super);
         function Main() {
             _super.apply(this, arguments);
+            this.nbClick = 0;
         }
         Main.prototype.create = function () {
             var thing = 'v3 !';
             this.text = this.add.text(10, 10, "Let's " + thing, { font: '65px Arial' });
+            this.input.onDown.add(this.onDown, this);
+        };
+        Main.prototype.onDown = function (pointer) {
+            this.nbClick++;
+            this.text.text = "You clicked " + this.nbClick + " times";
         };
         Main.prototype.update = function () {
             this.text.position.x += 1;
