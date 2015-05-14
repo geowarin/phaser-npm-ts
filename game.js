@@ -48,9 +48,9 @@ var game;
             }
         };
         Main.prototype.render = function () {
-            console.log('lol');
             _super.prototype.render.call(this);
-            this.game.debug.pointer(this.input.mousePointer);
+            this.game.debug.pointer(this.input.pointer1);
+            this.game.debug.pointer(this.input.pointer2);
         };
         return Main;
     })(Phaser.State);
