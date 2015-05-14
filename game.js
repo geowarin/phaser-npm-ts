@@ -16,7 +16,6 @@ var game;
         };
         Boot.prototype.create = function () {
             this.game.stage.backgroundColor = 0xFFFFFF;
-            this.input.maxPointers = 1;
             this.stage.disableVisibilityChange = true;
             this.game.state.start('preload');
         };
@@ -36,6 +35,7 @@ var game;
             var thing = 'v3 !';
             this.text = this.add.text(10, 10, "Let's " + thing, { font: '65px Arial' });
             this.input.onDown.add(this.onDown, this);
+            this.stage.backgroundColor = '#454645';
         };
         Main.prototype.onDown = function (pointer) {
             this.nbClick++;
@@ -46,6 +46,11 @@ var game;
             if (this.text.position.x > this.scale.bounds.width) {
                 this.text.position.x = 10;
             }
+        };
+        Main.prototype.render = function () {
+            console.log('lol');
+            _super.prototype.render.call(this);
+            this.game.debug.pointer(this.input.activePointer);
         };
         return Main;
     })(Phaser.State);
@@ -81,7 +86,7 @@ var game;
             _super.call(this, {
                 width: 768,
                 height: 432,
-                enableDebug: false,
+                enableDebug: true,
                 state: new game.Boot()
             });
             this.state.add('preload', game.Preload);
