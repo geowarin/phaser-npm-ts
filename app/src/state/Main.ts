@@ -1,19 +1,23 @@
+
 module game {
 
   export class Main extends Phaser.State {
-    text:Phaser.Text;
-    nbClick:number = 0;
+    text: Phaser.Text;
+    nbClick: number = 0;
 
     create() {
-      var thing:String = 'v3 !';
+      var thing: String = 'v3 !';
       this.text = this.add.text(10, 10, `Let's ${thing}`, {font: '65px Arial'});
       this.input.onDown.add(this.onDown, this);
       this.stage.backgroundColor = '#CCCCCC';
+
+      this.game['touchControl'] = this.game.plugins.add(TouchControl);
+      this.game['touchControl'].inputEnable();
     }
 
-    onDown(pointer:Phaser.Pointer) {
+    onDown(pointer: Phaser.Pointer) {
       this.nbClick++;
-      this.text.text = `You clicked ${this.nbClick} times`;
+      this.text.text = `You clicked ${ this.nbClick } times`;
     }
 
     update() {

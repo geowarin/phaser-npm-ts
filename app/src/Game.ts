@@ -2,6 +2,7 @@
 /// <reference path="./state/Boot.ts"/>
 /// <reference path="./state/Main.ts"/>
 /// <reference path="./state/Preload.ts"/>
+/// <reference path="./touch/TouchControl.ts"/>
 
 module game {
 
@@ -11,7 +12,8 @@ module game {
         width: 768,
         height: 432,
         enableDebug: true,
-        state: new Boot()
+        state: new Boot(),
+        renderer: Phaser.CANVAS
       });
 
       this.state.add('preload', Preload);
