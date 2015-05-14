@@ -17,11 +17,10 @@
     "build": "tsc -p .",
 
     "prewatch": "npm run copy",
-    "watch": "tsc -w -p .",
+    "watch": "tsc -w --sourceMap -p .",
     "serve": "http-server",
     "open:dev": "opener http://localhost:8080/dist",
-    "start": "parallelshell 'npm run watch' 'npm run serve' -s",
-    "poststart": "npm run open:dev",
+    "start": "parallelshell 'npm run watch' 'npm run serve' 'npm run open:dev'",
 
     "predeploy": "npm run build",
     "deploy": "node deploy.js",

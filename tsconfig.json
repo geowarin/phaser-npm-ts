@@ -1,27 +1,18 @@
 {
-    "version": "1.5.0-beta",
-    "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "declaration": false,
-        "noImplicitAny": false,
-        "removeComments": true,
-        "noLib": false,
-        "preserveConstEnums": true,
-        "suppressImplicitAnyIndexErrors": true,
-        "out": "dist/game.js",
-        "sourceMap": true
-    },
-    "filesGlob": [
-        "./**/*.ts",
-        "!./node_modules/**/*.ts"
-    ],
-    "files": [
-        "./app/src/Game.ts",
-        "./app/src/defs/definitions.d.ts",
-        "./app/src/state/Boot.ts",
-        "./app/src/state/Main.ts",
-        "./app/src/state/Preload.ts"
-    ],
-    "compileOnSave": false
+  "version": "1.5.0-beta",
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "noLib": false,
+    "preserveConstEnums": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "out": "dist/game.js"
+  },
+  "files": [
+    "./app/src/Game.ts"
+  ],
+  "compileOnSave": false
 }
