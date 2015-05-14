@@ -10,7 +10,7 @@ module game {
       super({
         width: 768,
         height: 432,
-        enableDebug: false,
+        enableDebug: true,
         state: new Boot()
       });
 

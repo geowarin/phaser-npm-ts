@@ -8,6 +8,7 @@ module game {
       var thing:String = 'v3 !';
       this.text = this.add.text(10, 10, `Let's ${thing}`, {font: '65px Arial'});
       this.input.onDown.add(this.onDown, this);
+      this.stage.backgroundColor = '#CCCCCC';
     }
 
     onDown(pointer:Phaser.Pointer) {
@@ -20,6 +21,14 @@ module game {
       if (this.text.position.x > this.scale.bounds.width) {
         this.text.position.x = 10;
       }
+    }
+
+    render() {
+      super.render();
+
+      //this.game.debug.pointer(this.input.mousePointer);
+      //this.game.debug.pointer(this.input.pointer1);
+      //this.game.debug.pointer(this.input.pointer2);
     }
   }
 }
