@@ -5,15 +5,21 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
+    "cleanPrepare": "npm run clean",
+    "postcleanPrepare": "mkdirp dist",
 
-    "precopy": "mkdirp dist",
+    "precopy": "npm run cleanPrepare",
     "copy:assets": "ncp app/assets dist/assets",
     "copy:html": "ncp app/html dist",
     "copy:phaser": "ncp node_modules/phaser/dist/phaser.js dist/phaser.js",
     "copy": "parallelshell 'npm run copy:assets' 'npm run copy:html' 'npm run copy:phaser'",
 
-    "prebuild": "npm run copy",
-    "build": "tsc -p .",
+    "pretypescript": "npm run copy",
+    "typescript": "tsc -p .",
+    "preuglify": "npm run typescript",
+    "uglify": "uglifyjs dist/phaser.js dist/game.js -o dist/game.min.js",
+    "build": "npm run uglify",
+    "postbuild": "rimraf dist/phaser.js dist/game.js && rename dist/index.prod.html dist/index.html",
 
     "prewatch": "npm run copy",
     "watch": "tsc -w --sourceMap -p .",
@@ -37,7 +43,8 @@
     "opener": "^1.4.1",
     "parallelshell": "^1.1.1",
     "rimraf": "^2.3.3",
-    "typescript": "^1.5.0-beta"
+    "typescript": "^1.5.0-beta",
+    "uglify-js": "^2.4.21"
   },
   "dependencies": {
     "phaser": "^2.3.0"
