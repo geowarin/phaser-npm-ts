@@ -23,15 +23,15 @@ module game {
       this.imageGroup = [];
 
       this.imageGroup.push(this.game.add.sprite(0, 0, 'compass'));
-      this.imageGroup.push(this.game.add.sprite(0, 0, 'touch_segment'));
+      // this.imageGroup.push(this.game.add.sprite(0, 0, 'touch_segment'));
       //this.imageGroup.push(this.game.add.sprite(0, 0, 'touch_segment'));
       this.imageGroup.push(this.game.add.sprite(0, 0, 'touch'));
 
-      this.imageGroup.forEach(function(e) {
+      for (let e of this.imageGroup) {
         e.anchor.set(0.5);
         e.visible = false;
         e.fixedToCamera = true;
-      });
+      }
     }
 
     inputEnable = function() {
@@ -58,9 +58,9 @@ module game {
     };
 
     removeCompass() {
-      this.imageGroup.forEach(function(e) {
+      for (let e of this.imageGroup) {
         e.visible = false;
-      });
+      }
 
       this.cursors.up = false;
       this.cursors.down = false;
@@ -70,10 +70,8 @@ module game {
       this.speed.x = 0;
       this.speed.y = 0;
 
-      this.preUpdate = this.empty;
+      this.preUpdate = () => {};
     };
-
-    empty() { }
 
     setDirection() {
       var d = this.initialPoint.distance(this.input.activePointer.position);
@@ -92,14 +90,14 @@ module game {
       this.speed.x = (deltaX / maxDistanceInPixels) * 100 * -1;
       this.speed.y = (deltaY / maxDistanceInPixels) * 100 * -1;
 
-      this.cursors.up = (deltaY < 0);
-      this.cursors.down = (deltaY > 0);
-      this.cursors.left = (deltaX < 0);
-      this.cursors.right = (deltaX > 0);
+      this.cursors.up = deltaY < 0;
+      this.cursors.down = deltaY > 0;
+      this.cursors.left = deltaX < 0;
+      this.cursors.right = deltaX > 0;
 
       this.imageGroup.forEach((e, i) => {
-        e.cameraOffset.x = this.initialPoint.x + (deltaX) * i / 3;
-        e.cameraOffset.y = this.initialPoint.y + (deltaY) * i / 3;
+        e.cameraOffset.x = this.initialPoint.x + deltaX * i / 2;
+        e.cameraOffset.y = this.initialPoint.y + deltaY * i / 2;
       });
     };
 

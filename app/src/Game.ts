@@ -3,6 +3,7 @@
 /// <reference path="./state/Main.ts"/>
 /// <reference path="./state/Preload.ts"/>
 /// <reference path="./touch/TouchControl.ts"/>
+/// <reference path="./touch/Joystick.ts"/>
 
 module game {
 
@@ -13,7 +14,7 @@ module game {
         height: 432,
         enableDebug: true,
         state: new Boot(),
-        renderer: Phaser.CANVAS
+        renderer: Phaser.AUTO
       });
 
       this.state.add('preload', Preload);
