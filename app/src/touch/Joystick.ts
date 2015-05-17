@@ -22,7 +22,7 @@ module Phaser {
   }
 
   export class VButton extends Sprite {
-    innerText:Text;
+    innerText: Text;
 
     constructor(game: Game, x: number, y: number, text: string) {
       var bmd = game.add.bitmapData(64, 64);
@@ -44,12 +44,15 @@ module Phaser {
     initialPos: Point;
     speed: Point;
     pad: Pad;
+    pointer:Pointer;
 
     constructor(game: Game, x: number, y: number) {
       var bmd = game.add.bitmapData(128, 128);
 
       bmd.ctx.beginPath();
       bmd.ctx.arc(64, 64, 64, 0, Math.PI2);
+      bmd.ctx.lineWidth = 15;
+      bmd.ctx.strokeStyle = 'black';
       bmd.ctx.stroke();
 
       super(game, x, y, bmd);
@@ -66,10 +69,12 @@ module Phaser {
 
     onDown(sprite: Sprite, pointer: Pointer) {
       this.initialPos = pointer.position.clone();
+      this.pointer = pointer;
     }
 
     onUp(sprite: Sprite, pointer: Pointer) {
       this.initialPos = null;
+      this.pointer = null;
       this.pad.cameraOffset.x = 32;
       this.pad.cameraOffset.y = 32;
       this.speed = new Point();
@@ -78,15 +83,15 @@ module Phaser {
     preUpdate() {
       super.preUpdate();
       if (this.initialPos) {
-        var d = this.initialPos.distance(this.game.input.activePointer.position);
+        var d = this.initialPos.distance(this.pointer.position);
         var maxDistanceInPixels = 40;
 
-        var pointerPos = this.game.input.activePointer.position;
+        var pointerPos = this.pointer.position;
         var deltaX = pointerPos.x - this.initialPos.x;
         var deltaY = pointerPos.y - this.initialPos.y;
 
 
-        var angle = this.initialPos.angle(this.game.input.activePointer.position);
+        var angle = this.initialPos.angle(this.pointer.position);
         if (d > maxDistanceInPixels) {
           deltaX = TheMath.cos(angle) * maxDistanceInPixels;
           deltaY = TheMath.sin(angle) * maxDistanceInPixels;
@@ -103,7 +108,6 @@ module Phaser {
         // this.cursors.right = deltaX > 0;
       }
     }
-
   }
 
   class Pad extends Sprite {
