@@ -2,7 +2,6 @@
 /// <reference path="./state/Boot.ts"/>
 /// <reference path="./state/Main.ts"/>
 /// <reference path="./state/Preload.ts"/>
-/// <reference path="./touch/TouchControl.ts"/>
 /// <reference path="./touch/Joystick.ts"/>
 
 module game {
