@@ -3,6 +3,43 @@ var TheMath = Math;
 
 module Phaser {
 
+  export class VirtualJoystick extends Plugin {
+    constructor(game: Phaser.Game, parent: PIXI.DisplayObject) {
+      super(game, parent);
+    }
+
+    addJoystick(x: number, y: number): Joystick {
+      var joystick = new Joystick(this.game, 40, 280);
+      this.game.add.existing(joystick);
+      return joystick;
+    }
+
+    addButton(x: number, y: number, text: string): VButton {
+      var button = new VButton(this.game, x, y, text);
+      this.game.add.existing(button);
+      return button;
+    }
+  }
+
+  export class VButton extends Sprite {
+    innerText:Text;
+
+    constructor(game: Game, x: number, y: number, text: string) {
+      var bmd = game.add.bitmapData(64, 64);
+
+      bmd.ctx.beginPath();
+      bmd.ctx.arc(32, 32, 32, 0, Math.PI2);
+      bmd.ctx.fillStyle = '#0088ff';
+      bmd.ctx.fill();
+
+      super(game, x, y, bmd);
+      this.inputEnabled = true;
+      this.innerText = new Text(game, 0, 0, text, '');
+      this.fixedToCamera = true;
+      this.addChild(this.innerText);
+    }
+  }
+
   export class Joystick extends Sprite {
     initialPos: Point;
     speed: Point;
