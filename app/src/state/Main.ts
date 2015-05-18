@@ -28,6 +28,7 @@ module game {
 
     update() {
       this.text.position.x += this.joystick.speed.x / 4;
+      this.text.position.y += this.joystick.speed.y / 4;
       this.game.world.wrap(this.text, 0, true);
     }
 

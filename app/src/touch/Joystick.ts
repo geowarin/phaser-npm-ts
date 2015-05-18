@@ -40,20 +40,63 @@ module Phaser {
     }
   }
 
+  class BitmapBuilder {
+    ctx: CanvasRenderingContext2D;
+
+    constructor(bmd: BitmapData) {
+      this.ctx = bmd.ctx;
+    }
+
+    circle(x: number, y: number, radius: number, borderColor?: string | CanvasGradient, width: number = 0, color?: string | CanvasGradient) {
+      this.ctx.save();
+      this.ctx.beginPath();
+      this.ctx.translate(x, y);
+      this.ctx.arc(0, 0, radius, 0, Math.PI2);
+      this.ctx.lineWidth = width;
+      this.ctx.strokeStyle = borderColor;
+      if (color) {
+        this.ctx.fillStyle = color;
+        this.ctx.fill();
+      }
+      this.ctx.stroke();
+      this.ctx.restore();
+      return this;
+    }
+
+    triangle(x: number, y: number, rotation: number, color?: string | CanvasGradient) {
+      this.ctx.save();
+      this.ctx.translate(x, y);
+      this.ctx.rotate(rotation);
+      this.ctx.beginPath();
+
+      this.ctx.moveTo(0, -10);
+      this.ctx.lineTo(10, 10);
+      this.ctx.lineTo(-10, 10);
+      this.ctx.lineTo(0, -10);
+      this.ctx.fillStyle = color;
+      this.ctx.closePath();
+      this.ctx.fill();
+      this.ctx.restore();
+      return this;
+    }
+  }
+
   export class Joystick extends Sprite {
     initialPos: Point;
     speed: Point;
     pad: Pad;
-    pointer:Pointer;
+    pointer: Pointer;
 
     constructor(game: Game, x: number, y: number) {
-      var bmd = game.add.bitmapData(128, 128);
 
-      bmd.ctx.beginPath();
-      bmd.ctx.arc(64, 64, 64, 0, Math.PI2);
-      bmd.ctx.lineWidth = 15;
-      bmd.ctx.strokeStyle = 'black';
-      bmd.ctx.stroke();
+      var bmd = game.add.bitmapData(128, 128);
+      new BitmapBuilder(bmd)
+        .circle(64, 64, 60, '#777', 8)
+        .circle(64, 64, 50, '#AAA', 16)
+        .triangle(116, 64, TheMath.PI / 2)
+        .triangle(64, 116, TheMath.PI)
+        .triangle(12, 64, -TheMath.PI / 2)
+        .triangle(64, 12, 0);
 
       super(game, x, y, bmd);
       this.inputEnabled = true;
@@ -63,6 +106,7 @@ module Phaser {
       this.pad = new Pad(game, 32, 32);
       this.addChild(this.pad);
 
+      this.alpha = 0.5;
       this.fixedToCamera = true;
       this.speed = new Point();
     }
@@ -84,7 +128,7 @@ module Phaser {
       super.preUpdate();
       if (this.initialPos) {
         var d = this.initialPos.distance(this.pointer.position);
-        var maxDistanceInPixels = 40;
+        var maxDistanceInPixels = 50;
 
         var pointerPos = this.pointer.position;
         var deltaX = pointerPos.x - this.initialPos.x;
@@ -115,10 +159,12 @@ module Phaser {
     constructor(game: Game, x: number, y: number) {
       var bmd = game.add.bitmapData(64, 64);
 
-      bmd.ctx.beginPath();
-      bmd.ctx.arc(32, 32, 32, 0, Math.PI2);
-      bmd.ctx.fillStyle = '#ff0000';
-      bmd.ctx.fill();
+      var grd = bmd.ctx.createLinearGradient(0, 0, 0, 15);
+      grd.addColorStop(0, "black");
+      grd.addColorStop(1, "rgba(100, 100, 100, 1)");
+
+      new BitmapBuilder(bmd)
+        .circle(32, 32, 25, 'black', 4, grd);
 
       super(game, x, y, bmd);
       this.fixedToCamera = true;
