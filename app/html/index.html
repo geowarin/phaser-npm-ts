@@ -10,13 +10,16 @@
   <meta name="apple-mobile-web-app-title" content="Space tour">
   <meta name="viewport" content="user-scalable=no, initial-scale=1.0, width=device-width, height=device-height"/>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.20/system.js"></script>
   <script src="phaser.js"></script>
   <script src="game.js"></script>
 </head>
 
 <body style="background-color: black">
 <script type="text/javascript">
-  new game.Game();
+  System.import('Game').then(function(Game) {
+    new Game.default();
+  })
 </script>
 </body>
 

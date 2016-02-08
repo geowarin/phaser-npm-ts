@@ -1,33 +1,29 @@
 /// <reference path="./defs/definitions.d.ts"/>
-/// <reference path="./state/Boot.ts"/>
-/// <reference path="./state/Main.ts"/>
-/// <reference path="./state/Preload.ts"/>
-/// <reference path="./touch/Joystick.ts"/>
+import Boot from './state/Boot';
+import Main from './state/Main';
+import Preload from './state/Preload';
 
-module game {
+export default class Game extends Phaser.Game {
+  constructor() {
+    super({
+      width: 768,
+      height: 432,
+      enableDebug: true,
+      state: new Boot(),
+      renderer: Phaser.AUTO
+    });
 
-  export class Game extends Phaser.Game {
-    constructor() {
-      super({
-        width: 768,
-        height: 432,
-        enableDebug: true,
-        state: new Boot(),
-        renderer: Phaser.AUTO
-      });
+    this.state.add('preload', Preload);
+    this.state.add('main', Main);
+  }
 
-      this.state.add('preload', Preload);
-      this.state.add('main', Main);
+  boot() {
+    super.boot();
+    if (this.device.desktop === false) {
+      this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+      this.scale.forceOrientation(true, false);
     }
-
-    boot() {
-      super.boot();
-      if (this.device.desktop === false) {
-        this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        this.scale.forceOrientation(true, false);
-      }
-      this.scale.pageAlignHorizontally = true;
-      this.scale.pageAlignVertically = true;
-    }
+    this.scale.pageAlignHorizontally = true;
+    this.scale.pageAlignVertically = true;
   }
 }
