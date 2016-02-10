@@ -7,7 +7,7 @@ export default class Main extends Phaser.State {
   joystick:Joystick;
 
   create() {
-    var thing:String = 'kikoo !';
+    var thing:String = 'go !';
     this.text = this.add.text(10, 200, `Let's ${thing}`, {font: '65px Arial'});
     this.stage.backgroundColor = '#CCCCCC';
 

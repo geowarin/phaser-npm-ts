@@ -9,7 +9,7 @@
     "noLib": false,
     "preserveConstEnums": true,
     "suppressImplicitAnyIndexErrors": true,
-    "outFile": "dist/game.js"
+    "outFile": "build/game.js"
   },
   "files": [
     "src/Game.ts"
