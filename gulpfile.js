@@ -7,7 +7,7 @@ var gulp = require('gulp'),
   open = require('gulp-open'),
   concat = require('gulp-concat'),
   processhtml = require('gulp-processhtml'),
-  exec = require('child_process').exec,
+  spawn = require('child_process').spawn,
   path = require('path');
 
 var paths = {
@@ -33,19 +33,16 @@ gulp.task('copyAssets', function () {
 });
 
 gulp.task('typescript', function (cb) {
-  return exec('node_modules/.bin/tsc -p .', function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
+  var cmd = spawn('node_modules/.bin/tsc', ['-p', '.'], {stdio: 'inherit'});
+  cmd.on('close', function (code) {
+    console.log('Typescript compilation finished');
+    cb(code);
   });
 });
 
 gulp.task('typescript:watch', function (cb) {
-  return exec('node_modules/.bin/tsc -w --sourceMap -p .', function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
+  var cmd = spawn('node_modules/.bin/tsc', ['-w', '--sourceMap', '-p', '.'], {stdio: 'inherit'});
+  cb();
 });
 
 gulp.task('processhtml', function () {
@@ -78,7 +75,7 @@ gulp.task('deploy', function () {
 });
 
 gulp.task('default', function (cb) {
-  runSequence(['typescript:watch', 'open', 'connect'], cb);
+  runSequence('typescript:watch', ['connect', 'open'], cb);
 });
 gulp.task('build', function (cb) {
   runSequence('clean', ['copyAssets', 'typescript', 'minifyJs', 'processhtml'], cb);
