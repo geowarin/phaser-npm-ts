@@ -70,7 +70,7 @@ gulp.task('minifyJs', ['typescript'], function () {
     .pipe(gulp.dest(paths.dist));
 });
 
-gulp.task('deploy', function () {
+gulp.task('deploy', ['build'], function () {
   return gulp.src('dist/**/*').pipe(deploy());
 });
 
