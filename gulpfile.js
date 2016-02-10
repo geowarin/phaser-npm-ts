@@ -60,7 +60,7 @@ gulp.task('connect', function () {
 
 gulp.task('open', function () {
   gulp.src(paths.index)
-    .pipe(open('', {url: 'http://localhost:9000'}));
+    .pipe(open({uri: 'http://localhost:9000'}));
 });
 
 gulp.task('minifyJs', ['typescript'], function () {
