@@ -9,10 +9,10 @@
     "noLib": false,
     "preserveConstEnums": true,
     "suppressImplicitAnyIndexErrors": true,
-    "out": "dist/game.js"
+    "outFile": "dist/game.js"
   },
   "files": [
-    "./app/src/Game.ts"
+    "src/Game.ts"
   ],
   "compileOnSave": false
 }

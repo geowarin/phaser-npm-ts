@@ -3,7 +3,6 @@ import Game = Phaser.Game;
 import Point = Phaser.Point;
 import Pointer = Phaser.Pointer;
 var TheMath = Math;
-//import Math = Phaser.Math;
 
 export class VirtualJoystick extends Phaser.Plugin {
   constructor(game:Phaser.Game, parent:PIXI.DisplayObject) {
